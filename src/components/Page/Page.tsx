@@ -3,6 +3,7 @@ import {Container} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import {PageType} from "../../types";
 import axiosApi from "../../axiosApi";
+import ReactQuill from "react-quill";
 
 const Page = () => {
   const {pageName} = useParams();
@@ -18,10 +19,13 @@ const Page = () => {
   }, [fetchContent]);
 
   return (
-    <Container>
-      <span className="d-block text-center text-uppercase fw-bold mb-3">{pageName}</span>
-      <h4>{content?.title}</h4>
-      <p>{content?.description}</p>
+    <Container className="pt-5">
+      <h4 className="text-center w-75 m-auto mb-4">{content?.title}</h4>
+      <ReactQuill
+        value={content?.description}
+        readOnly
+        theme={"bubble"}
+      />
     </Container>
   );
 };
