@@ -1,9 +1,9 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
+import {PagesType} from "../../types";
 import {Container} from "react-bootstrap";
 import {Navbar} from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';
-import {NavLink} from "react-router-dom";
-import {PagesType} from "../../types";
 
 interface NavBarProps {
   pages: PagesType [];

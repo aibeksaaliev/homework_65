@@ -1,23 +1,29 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import NavBar from "./components/NavBar/NavBar";
-import {Routes ,Route} from "react-router-dom";
-import Page from "./components/Page/Page";
-import AdminForm from "./components/AdminForm/AdminForm";
+import {Routes, Route, useLocation} from "react-router-dom";
 import {PagesType} from "./types";
 import axiosApi from "./axiosApi";
 import {Container} from "react-bootstrap";
+import NavBar from "./components/NavBar/NavBar";
+import Page from "./components/Page/Page";
+import AdminForm from "./components/AdminForm/AdminForm";
 
 function App() {
+  const location = useLocation();
   const [pages, setPages] = useState<PagesType []>([]);
 
   const fetchPagesNames = useCallback(async () => {
-    const pagesResponse = await axiosApi.get("/pages.json");
-    setPages(pagesResponse.data);
+    try {
+      const pagesResponse = await axiosApi.get("/pages.json");
+      setPages(pagesResponse.data);
+    } catch (e) {
+      throw new Error("Error");
+    }
+
   }, []);
 
   useEffect(() => {
     void fetchPagesNames();
-  }, [fetchPagesNames]);
+  }, [location ,fetchPagesNames]);
 
   return (
     <>
